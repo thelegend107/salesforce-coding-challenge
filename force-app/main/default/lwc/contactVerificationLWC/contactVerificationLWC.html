@@ -1,0 +1,50 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-card
+        title="Contact Verification"
+        icon-name="utility:locker_service_console"
+    >
+        <div class="slds-m-around_medium">
+            <p>Search Contacts</p>
+            <div
+                style="
+                    display: flex;
+                    width: 100%;
+                    gap: 5px;
+                    align-items: center;
+                "
+            >
+                <lightning-input
+                    variant="label-hidden"
+                    placeholder="type lastname or email..."
+                    value={searchKeyword}
+                    onchange={handleSearchKeywordChange}
+                    style="flex-grow: 1"
+                    type="text"
+                ></lightning-input>
+                <lightning-button
+                    variant="brand"
+                    label="SEARCH"
+                    title="Primary action"
+                    onclick={handleSearchClick}
+                ></lightning-button>
+            </div>
+            <template if:true={loading}>
+                <lightning-spinner
+                    alternative-text="Loading"
+                ></lightning-spinner>
+            </template>
+            <template if:true={searchInput}>
+                <div style="width: 100%; margin-top: 5px">
+                    <lightning-datatable
+                        style="border-radius: 25px"
+                        key-field="Id"
+                        data={contactsAndAccounts}
+                        columns={columns}
+                    >
+                    </lightning-datatable>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
